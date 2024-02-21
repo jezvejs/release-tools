@@ -63,7 +63,7 @@ class VersionCommitClient {
 
         const version = getPackageVersion(`./packages/${packageName}/package.json`);
 
-        shell.pushd('-q', gitDir);
+        shell.pushd('-q', this.gitDir);
 
         shell.exec(`git commit -a -m "Updated version to ${version}"`);
         shell.exec(`git checkout ${releaseBranch} --`);
