@@ -1,0 +1,36 @@
+{
+    "name": "@jezvejs/release-tools-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "p-install": "npm install",
+        "p-update": "npm update",
+        "p-publish": "npm publish",
+        "p-version": "npm version",
+        "lint": "npx eslint --quiet ./packages/ ./scripts/",
+        "all": "npm-run-all lint",
+        "build-all": "exit 0",
+        "deploy": "node ./scripts/deploy.js",
+        "commit-version": "node ./scripts/commit-version.js",
+        "release": "node ./scripts/release.js"
+    },
+    "author": "Ilya Makarov",
+    "license": "ISC",
+    "workspaces": [
+        "packages/*"
+    ],
+    "devDependencies": {
+        "eslint": "^8.56.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.29.1"
+    },
+    "dependencies": {
+        "@jezvejs/release-tools": "^0.2.0",
+        "@jezvejs/types": "^1.0.0",
+        "dotenv": "^16.4.5"
+    }
+}
