@@ -74,3 +74,9 @@ export const getPackageVersion = (fileName) => {
     const json = JSON.parse(content);
     return json.version;
 };
+
+export const getFirstPathPart = (path, sourcePart) => {
+    const relPath = path.startsWith(sourcePart) ? path.substring(sourcePart.length + 1) : path;
+    const parts = relPath.split(/[\\/]/);
+    return parts[0].toLowerCase();
+};
