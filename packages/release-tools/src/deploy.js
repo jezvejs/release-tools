@@ -1,4 +1,3 @@
-import { join } from 'path';
 import Client from 'ssh2-sftp-client';
 import ProgressBar from 'progress';
 
@@ -93,7 +92,7 @@ class DeployClient {
     }
 
     destPath(...parts) {
-        return join(this.dest, ...parts);
+        return `${this.dest}/${parts.join('/')}`;
     }
 
     async initProgress() {
