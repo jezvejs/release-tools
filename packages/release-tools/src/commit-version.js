@@ -12,6 +12,7 @@ class VersionCommitClient {
         destDir: null,
         appDir: null,
         gitDir: null,
+        packageName: null,
         mainBranch: 'main',
         releaseBranch: 'release',
         versionFiles: [],
@@ -61,7 +62,11 @@ class VersionCommitClient {
             });
         }
 
-        const version = getPackageVersion(`./packages/${packageName}/package.json`);
+        const packagePath = (packageName)
+            ? `./packages/${packageName}/package.json`
+            : './package.json';
+
+        const version = getPackageVersion(packagePath);
 
         shell.pushd('-q', this.gitDir);
 
