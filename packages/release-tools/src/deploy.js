@@ -172,7 +172,7 @@ class DeployClient {
     // Upload extra files
     async extraUpload() {
         const files = asArray(this.props.extraUpload);
-        const distRoot = ['..', 'dist'].join('/');
+        const distRoot = ['..', '..', 'dist'].join('/');
 
         for (const item of files) {
             await this.client.put(
@@ -201,7 +201,10 @@ class DeployClient {
     }
 
     async initProgress() {
-        this.srcDir = await getDirectoryFiles(this.src);
+        this.srcDir = null;
+        this.srcDir = await getDirectoryFiles(this.src, (source) => (
+            this.filterFiles(source)
+        ));
 
         this.progress = new ProgressBar('[:bar] :percent :file', {
             total: this.srcDir.files.length + 1,
@@ -223,7 +226,12 @@ class DeployClient {
 
     filterFiles(source) {
         const { filterFiles } = this.props;
-        return !filterFiles || filterFiles(source);
+
+        if (this.srcDir?.linkNames?.includes(source)) {
+            return false;
+        }
+
+        return !filterFiles || filterFiles(source, this.src);
     }
 
     async isExists(path) {

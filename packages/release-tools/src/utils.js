@@ -28,6 +28,7 @@ export const getDirectoryFiles = async (directoryPath, filterFiles = null) => {
     const res = {
         files: [],
         links: [],
+        linkNames: [],
         linkTargets: [],
     };
     const files = await readdir(directoryPath, { withFileTypes: true, recursive: true });
@@ -40,6 +41,7 @@ export const getDirectoryFiles = async (directoryPath, filterFiles = null) => {
 
         if (file.isSymbolicLink()) {
             res.links.push(file);
+            res.linkNames.push(fullName);
         } else if (file.isFile()) {
             res.files.push(file);
         }
