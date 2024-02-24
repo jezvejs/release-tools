@@ -21,6 +21,8 @@ class DeployClient {
         partialUploadSkipList: null,
         removeSkipList: null,
         cleanAll: false,
+        extraUpload: null,
+        extraUploadRoot: null,
     };
 
     static create(props) {
@@ -172,11 +174,11 @@ class DeployClient {
     // Upload extra files
     async extraUpload() {
         const files = asArray(this.props.extraUpload);
-        const distRoot = ['..', '..', 'dist'].join('/');
+        const srcPathItems = asArray(this.props.extraUploadRoot);
 
         for (const item of files) {
             await this.client.put(
-                this.srcPath(distRoot, item),
+                this.srcPath(...srcPathItems, item),
                 this.destPath(item),
             );
         }
