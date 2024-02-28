@@ -1,23 +1,17 @@
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import { readdir, readlink, stat } from 'fs/promises';
-import runAll from 'npm-run-all';
+import { execSync } from 'child_process';
 
 /* eslint-disable no-console */
 
-export const runCommand = async (command) => {
+export const runCommand = (command) => {
     const options = {
-        stdin: process.stdin,
-        stdout: process.stdout,
-        stderr: process.stderr,
+        stdio: 'inherit',
     };
 
     try {
-        const [result] = await runAll([command], options);
-        if (result.code !== 0) {
-            console.log('Command failed');
-            process.exit(result.code);
-        }
+        execSync(command, options);
     } catch (error) {
         console.log(error.message);
         process.exit(1);

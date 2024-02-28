@@ -7,10 +7,6 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "p-install": "npm install",
-        "p-update": "npm update",
-        "p-publish": "npm publish",
-        "p-version": "npm version",
         "lint": "npx eslint --quiet ./packages/ ./scripts/",
         "all": "npm-run-all lint",
         "build-all": "exit 0",

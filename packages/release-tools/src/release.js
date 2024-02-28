@@ -1,36 +1,36 @@
 import { asArray } from '@jezvejs/types';
 import { runCommand } from './utils.js';
 
-export const release = async (props) => {
+export const release = (props) => {
     const {
         packageName = null,
         newVersion,
         isMainPackage = true,
-        deployCommand = 'deploy',
+        deployCommand = 'npm run deploy',
         publish = true,
     } = props;
     const beforeCommit = asArray(props.beforeCommit);
 
     const workspace = (packageName) ? `-w ${packageName}` : '';
 
-    await runCommand('all');
-    await runCommand(`p-version -- ${newVersion} ${workspace}`);
-    await runCommand(`p-install -- ${workspace}`);
-    await runCommand('p-update -- --save');
+    runCommand('npm run all');
+    runCommand(`npm version ${newVersion} ${workspace}`);
+    runCommand(`npm install ${workspace}`);
+    runCommand('npm update --save');
 
     if (isMainPackage) {
-        await runCommand('build-all');
+        runCommand('npm run build-all');
         for (const command of beforeCommit) {
-            await runCommand(command);
+            runCommand(command);
         }
     }
 
     if (publish) {
-        await runCommand(`p-publish -- ${workspace}`);
+        runCommand(`npm publish ${workspace}`);
     }
 
     if (isMainPackage) {
-        await runCommand('commit-version');
-        await runCommand(deployCommand);
+        runCommand('npm run commit-version');
+        runCommand(deployCommand);
     }
 };
