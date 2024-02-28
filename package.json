@@ -9,7 +9,6 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "npx eslint --quiet ./packages/ ./scripts/",
         "all": "npm-run-all lint",
-        "build-all": "exit 0",
         "deploy": "node ./scripts/deploy.js",
         "commit-version": "node ./scripts/commit-version.js",
         "release": "node ./scripts/release.js"

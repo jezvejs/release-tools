@@ -1,28 +1,29 @@
-import { asArray } from '@jezvejs/types';
-import { runCommand } from './utils.js';
+import { runCommand, runCommands } from './utils.js';
 
 export const release = (props) => {
     const {
         packageName = null,
         newVersion,
         isMainPackage = true,
+        beforeVersion = 'npm run all',
+        buildAllCommand = 'npm run build-all',
+        beforeCommit = null,
+        commitCommand = 'npm run commit-version',
         deployCommand = 'npm run deploy',
         publish = true,
     } = props;
-    const beforeCommit = asArray(props.beforeCommit);
 
     const workspace = (packageName) ? `-w ${packageName}` : '';
 
-    runCommand('npm run all');
+    runCommands(beforeVersion);
+
     runCommand(`npm version ${newVersion} ${workspace}`);
     runCommand(`npm install ${workspace}`);
     runCommand('npm update --save');
 
     if (isMainPackage) {
-        runCommand('npm run build-all');
-        for (const command of beforeCommit) {
-            runCommand(command);
-        }
+        runCommands(buildAllCommand);
+        runCommands(beforeCommit);
     }
 
     if (publish) {
@@ -30,7 +31,7 @@ export const release = (props) => {
     }
 
     if (isMainPackage) {
-        runCommand('npm run commit-version');
-        runCommand(deployCommand);
+        runCommands(commitCommand);
+        runCommands(deployCommand);
     }
 };

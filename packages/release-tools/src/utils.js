@@ -2,6 +2,7 @@ import { join } from 'path';
 import { readFileSync } from 'fs';
 import { readdir, readlink, stat } from 'fs/promises';
 import { execSync } from 'child_process';
+import { asArray } from '@jezvejs/types';
 
 /* eslint-disable no-console */
 
@@ -16,6 +17,10 @@ export const runCommand = (command) => {
         console.log(error.message);
         process.exit(1);
     }
+};
+
+export const runCommands = (commands) => {
+    asArray(commands).forEach(runCommand);
 };
 
 export const getDirectoryFiles = async (directoryPath, filterFiles = null) => {
