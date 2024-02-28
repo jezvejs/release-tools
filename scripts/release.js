@@ -15,14 +15,9 @@ const packageName = (process.argv.length > 3)
     : MAIN_PACKAGE;
 const isMainPackage = (packageName === MAIN_PACKAGE);
 
-const run = async () => {
-    await release({
-        packageName,
-        isMainPackage,
-        newVersion,
-    });
-
-    process.exit(0);
-};
-
-run();
+release({
+    packageName,
+    isMainPackage,
+    newVersion,
+    buildAllCommand: null,
+});
