@@ -24,7 +24,7 @@
         "eslint-plugin-import": "^2.29.1"
     },
     "dependencies": {
-        "@jezvejs/release-tools": "^0.5.0",
+        "@jezvejs/release-tools": "^0.5.1",
         "@jezvejs/types": "^1.0.0",
         "dotenv": "^16.4.5"
     }
