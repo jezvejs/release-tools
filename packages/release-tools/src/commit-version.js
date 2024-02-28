@@ -72,7 +72,7 @@ class VersionCommitClient {
 
         shell.exec(`git commit -a -m "Updated version to ${version}"`);
         shell.exec(`git checkout ${releaseBranch} --`);
-        shell.exec(`git pull -v --no-rebase "origin/${releaseBranch}"`);
+        shell.exec('git pull -v --no-rebase "origin"');
         shell.exec(`git merge --no-ff -m "Version ${version}" ${mainBranch}`);
         shell.exec(`git tag -a v.${version} -m "Version ${version}"`);
         shell.exec(`git checkout ${mainBranch} --`);
