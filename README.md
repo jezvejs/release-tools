@@ -21,6 +21,9 @@ npm install -D @jezvejs/release-tools
 
 <h2 align="left">Environment setup</h2>
 
+It is recommended to use `.env` files to store sensitive data.
+
+
 ```bash
 SFTP_SERVER='<your domain>'
 SFTP_USER='<FTP user>'
@@ -62,7 +65,7 @@ release({
 
 Add NPM script to `package.json`:
 
-```json
+```js
 "scripts": {
     ...
     "release": "node ./scripts/release.js"
