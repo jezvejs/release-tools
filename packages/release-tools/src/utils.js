@@ -11,6 +11,11 @@ export const runCommand = (command) => {
         stdio: 'inherit',
     };
 
+    const cmd = command ?? '';
+    if (!cmd.length) {
+        return;
+    }
+
     try {
         execSync(command, options);
     } catch (error) {
