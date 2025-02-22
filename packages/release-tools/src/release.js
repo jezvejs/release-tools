@@ -6,6 +6,7 @@ export const release = (props) => {
         newVersion,
         isMainPackage = true,
         beforeVersion = 'npm run all',
+        updateCommand = 'npm update --save',
         buildAllCommand = 'npm run build-all',
         beforeCommit = null,
         commitCommand = 'npm run commit-version',
@@ -19,7 +20,7 @@ export const release = (props) => {
 
     runCommand(`npm version ${newVersion} ${workspace}`);
     runCommand(`npm install ${workspace}`);
-    runCommand('npm update --save');
+    runCommand(updateCommand);
 
     if (isMainPackage) {
         runCommands(buildAllCommand);
