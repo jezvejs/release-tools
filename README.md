@@ -7,9 +7,7 @@ Simple tools for package release automation:
 - Build package release
 - Create git commit for version and merge to release branch
 - Publish on NPM registry
-- Deploy to remove server using SFTP
-
-Something like mini CI/CD.
+- Deploy to remote server using SFTP
 
 <h2 align="left">Install</h2>
 
