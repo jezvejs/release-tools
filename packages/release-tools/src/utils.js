@@ -38,7 +38,7 @@ export const getDirectoryFiles = async (directoryPath, filterFiles = null) => {
     const files = await readdir(directoryPath, { withFileTypes: true, recursive: true });
 
     files.forEach((file) => {
-        const fullName = join(file.path, file.name);
+        const fullName = join(file.path ?? '', file.name);
         if (filterFiles && !filterFiles(fullName)) {
             return;
         }
@@ -52,7 +52,7 @@ export const getDirectoryFiles = async (directoryPath, filterFiles = null) => {
     });
 
     for (const item of res.links) {
-        const fullName = join(item.path, item.name);
+        const fullName = join(item.path ?? '', item.name);
         const linkValue = await readlink(fullName);
         const linkTarget = await stat(linkValue);
 
